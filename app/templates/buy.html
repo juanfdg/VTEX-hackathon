@@ -9,6 +9,25 @@
     <h2>{{product.name}}</h2>
     <p>{{product.description}}</p>
     <br>
+    <form class="form-signin" method="post" enctype="multipart/form-data" action="{{ url_for('buy') }}">
+      <div class="input-group" style="margin-bottom: 10px;">
+          <input type="text" class="form-control" placeholder="Text" aria-label="Text" name="text" style="text-align: left;">
+          <div class="input-group-append">
+            <span class="input-group-text">Choose Text</span>
+          </div>
+      </div>
+
+      <div class="input-group">
+        <div class="custom-file" style="margin-bottom: 10px;">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" name="image">
+          <label class="custom-file-label" for="inputGroupFile01">Choose Image</label>
+        </div>
+      </div>
+
+      <div class="input-group" style="margin: 0 175px;">
+        <button class="btn btn-outline-secondary" type="submit">See your changes!</button>
+      </div>
+    </form>
   </div>
 </section>
 
