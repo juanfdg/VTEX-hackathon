@@ -17,6 +17,3 @@ class Product(db.Model):
 
     def __repr__(self):
         return '<Name = {}>'.format(self.name)
-
-    # def add_customization(self, name, font, x, y, l, h):
-    #     self.customizations.append(Customization(name, font, x, y, l, h))
