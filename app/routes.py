@@ -9,7 +9,7 @@ def temporary(filename):
 
 @app.route('/')
 def index():
-    shutil.rmtree('app/temporary/')
+    shutil.rmtree('app/temporary/', ignore_errors=True)
     products = Product.query.all()
     return render_template('index.html', products=products)
 
