@@ -1,1 +1,1 @@
-#VTEX Hackathon
+# VTEX Hackathon
