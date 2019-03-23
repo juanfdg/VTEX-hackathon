@@ -1,4 +1,5 @@
-from flask import render_template, url_for, request, send_from_directory
+import shutil
+from flask import render_template, url_for, request, send_from_directory, after_this_request
 from app import app, db
 from app.models import Product, ImageWorker
 
@@ -8,6 +9,7 @@ def temporary(filename):
 
 @app.route('/')
 def index():
+    shutil.rmtree('app/temporary/')
     products = Product.query.all()
     return render_template('index.html', products=products)
 
@@ -19,7 +21,6 @@ def buy():
 
     if request.method == 'POST':
         text = request.form.get('text')
-        print(text)
         thumb = url_for('temporary', filename=ImageWorker.customize(product, text))
 
     return render_template('buy.html', product=product, thumb=thumb)
