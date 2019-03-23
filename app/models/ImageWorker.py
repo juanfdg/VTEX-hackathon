@@ -19,12 +19,15 @@ class ImageWorker:
 
         # starting position of message
         (x, y) = (product.box_x, product.box_y)
+        image_w, image_h = image.size
+        image_w /= 2
+        image_h /= 2
 
-        w, h = draw.textsize(text)
+        text_w, text_h = draw.textsize(text)
 
         # Draw message on the background
         font_color = (product.font_color_r, product.font_color_g, product.font_color_b)
-        draw.text(((x-w)/2, (y-h)/2), text, fill=font_color, font=font)
+        draw.text((image_w+(x-text_w)/2, image_h-(y-text_h)/2), text, fill=font_color, font=font)
 
         # Return the edited image
         filename, file_extension = os.path.splitext(product.thumb)
