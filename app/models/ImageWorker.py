@@ -25,7 +25,7 @@ def customize(product, texts):
     # Return the edited image
     filename, file_extension = os.path.splitext(product.thumb)
 
-    custom_file = filename + "_custom" + file_extension
+    custom_file = '../temporary/' + filename + "_custom" + file_extension
     image.save(custom_file)
 
     return custom_file
