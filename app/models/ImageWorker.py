@@ -1,4 +1,5 @@
 import os
+import secrets
 from PIL import Image, ImageDraw, ImageFont
 from app.models import Product
 from flask import url_for
@@ -30,7 +31,7 @@ class ImageWorker:
         filename, file_extension = os.path.splitext(product.thumb)
 
         os.makedirs('app/temporary', exist_ok=True)
-        custom_file = f'{filename}_custom_{text}{file_extension}'
+        custom_file = f'{filename}_custom_{secrets.token_urlsafe(16)}{file_extension}'
         image.save(f'app/temporary/{custom_file}')
 
         return custom_file
