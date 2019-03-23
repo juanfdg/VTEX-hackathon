@@ -1,34 +1,36 @@
-from PIL import Image, ImageDraw, ImageFont
 import os
-from Product import Product, Font
+from PIL import Image, ImageDraw, ImageFont
+from app.models import Product
+from flask import url_for
 
 
-def customize(product, texts):
-    # Create image with input image
-    image = Image.open(product.thumb)
+class ImageWorker:
+    def customize(product, texts):
+        # Create image with input image
+        image = Image.open(f'app/static/img/{product.thumb}')
 
-    # Initialise the drawing context with the image
-    # object as background
-    draw = ImageDraw.Draw(image)
+        # Initialise the drawing context with the image
+        # object as background
+        draw = ImageDraw.Draw(image)
 
-    for idx, custom in enumerate(product.customizations):
-        # Create font object with the font file and specify
-        # desired size
-        font = ImageFont.truetype(custom.font.font, custom.font.size)
+        for idx, custom in enumerate(product.customizations):
+            # Create font object with the font file and specify
+            # desired size
+            font = ImageFont.truetype(custom.font.font, custom.font.size)
 
-        # starting position of message
-        (x, y) = (custom.box.x, custom.box.y)
+            # starting position of message
+            (x, y) = (custom.box.x, custom.box.y)
 
-        # Draw message on the background
-        draw.text((x, y), texts[idx], fill=custom.font.color, font=font)
+            # Draw message on the background
+            draw.text((x, y), texts[idx], fill=custom.font.color, font=font)
 
-    # Return the edited image
-    filename, file_extension = os.path.splitext(product.thumb)
+        # Return the edited image
+        filename, file_extension = os.path.splitext(product.thumb)
 
-    custom_file = '../temporary/' + filename + "_custom" + file_extension
-    image.save(custom_file)
+        custom_file = '../temporary/' + filename + "_custom" + file_extension
+        image.save(custom_file)
 
-    return custom_file
+        return custom_file
 
 
 if __name__ == '__main__':
