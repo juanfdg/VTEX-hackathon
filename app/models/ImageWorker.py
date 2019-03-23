@@ -24,7 +24,7 @@ class ImageWorker:
         image_w /= 2
         image_h /= 2
 
-        text_w, text_h = draw.textsize(text)
+        text_w, text_h = font.getsize(text)
 
         # Draw message on the background
         font_color = (product.font_color_r, product.font_color_g, product.font_color_b)
