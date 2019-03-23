@@ -1,6 +1,10 @@
-from flask import render_template, url_for, request
+from flask import render_template, url_for, request, send_from_directory
 from app import app, db
 from app.models import Product, ImageWorker
+
+@app.route('/temporary/<path:filename>')
+def temporary(filename):
+  return send_from_directory(app.config['TEMP_FOLDER'], filename)
 
 @app.route('/')
 def index():
@@ -15,6 +19,7 @@ def buy():
 
     if request.method == 'POST':
         text = request.form.get('text')
-        thumb = f'temporary/{ImageWorker.customize(product, text)}'
+        print(text)
+        thumb = url_for('temporary', filename=ImageWorker.customize(product, text))
 
     return render_template('buy.html', product=product, thumb=thumb)
