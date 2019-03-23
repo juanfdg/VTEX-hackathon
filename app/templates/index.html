@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="jumbotron text-center">
+  <div id="expand" class="container">
+    <h1 class="jumbotron-heading">VTEX PC API</h1>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+      {% for product in products %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <img class="card-img-top" src="{{product.thumb}}" alt="img-thumb">
+          <div class="card-body">
+            <p class="card-text">{{product.name}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{{url_for('buy', id=product.id)}}">
+                  <form action="" method="post">
+                    <input type="hidden" name="product_id" value="0">
+                    <button type="button" type="submit" class="btn btn-sm btn-outline-secondary">Buy</button>
+                  </form>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
